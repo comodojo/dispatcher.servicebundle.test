@@ -1,0 +1,25 @@
+{
+    "name": "comodojo/dispatcher.servicebundle.test",
+    "description": "Test service bundle",
+    "type": "dispatcher-service-bundle",
+    "authors": [
+        {
+            "name": "comodojo",
+            "email": "info@comodojo.org"
+        }
+    ],
+    "extra": {
+        "comodojo-service-route": [
+            {
+                "service": "test",
+                "type": "ROUTE",
+                "target": "test.php"
+            }
+        ]
+    },
+    "require": {
+        "comodojo/dispatcher.template.bootstrap": "dev-master",
+        "comodojo/dispatcher.servicebundle.default": "dev-master",
+        "comodojo/dispatcher.plugin.performance": "dev-master"
+    }
+}
