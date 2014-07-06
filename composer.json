@@ -20,6 +20,6 @@
     "require": {
         "comodojo/dispatcher.template.bootstrap": "dev-master",
         "comodojo/dispatcher.servicebundle.default": "dev-master",
-        "comodojo/dispatcher.plugin.performance": "dev-master"
+        "comodojo/dispatcher.plugin.performer": "dev-master"
     }
 }
