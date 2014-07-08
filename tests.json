@@ -1,0 +1,40 @@
+{
+	"test1": {
+		"description": "test of tests",
+		"type": "compare",
+		"send": {
+			//method
+			//content
+			//headers
+		},
+		"receive": {
+			"status": 200,
+			"headers": [
+				{
+					"header": "Content-Length",
+					"value": 22
+				},{
+					"header": "foo-Length",
+					"value": "bla"
+				}
+			],
+			"response": [
+				{
+					"rule": "match", //contain, !match, !contain
+					"content": "this is a test message"
+				},{
+					"rule": "!contain", //contain, !match, !contain
+					"content": "foo"
+				}
+			]
+		}
+	},
+	"test2": {
+		"description": "test performance",
+		"type": "performance",
+		"times": 10,
+		"delay": 500,
+		"send": {}
+	}
+
+}
