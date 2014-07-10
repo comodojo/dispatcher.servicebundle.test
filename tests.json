@@ -2,11 +2,7 @@
 	"test1": {
 		"description": "test of tests",
 		"type": "compare",
-		"send": {
-			//method
-			//content
-			//headers
-		},
+		"send": {},
 		"receive": {
 			"status": 200,
 			"headers": [
@@ -20,10 +16,10 @@
 			],
 			"response": [
 				{
-					"rule": "match", //contain, !match, !contain
+					"rule": "match",
 					"content": "this is a test message"
 				},{
-					"rule": "!contain", //contain, !match, !contain
+					"rule": "!contain",
 					"content": "foo"
 				}
 			]

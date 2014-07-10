@@ -10,16 +10,9 @@ var dispatcher = {
 
 	loadTests: function() {
 
-		$.getJSON( "vendor/comodojo/dispatcher.servicebundle.test/tests.js", {} ).done( function( json ) {
+		var basepath = location.href.split("/test/");
 
-			dispatcher.tests = json;
-
-		}).fail(function( jqxhr, textStatus, error ) {
-			
-			var err = textStatus + ", " + error;
-			alert( "Error loading tests: " + err );
-
-		});
+		return $.getJSON( basepath[0]+"/vendor/comodojo/dispatcher.servicebundle.test/tests.json", {} );
 
 	},
 
@@ -67,7 +60,7 @@ var dispatcher = {
 
 	},
 
-	execTest: function(test, pattern) {
+	execCompare: function(test, pattern) {
 
 		var target = dispatcher.getTestTarget(test);
 
@@ -77,11 +70,11 @@ var dispatcher = {
 
 		var headers = typeof pattern.send.headers == "object" ? pattern.send.headers : {};
 
-		dispatcher.execTestTrigger(target, method, content, headers);
+		dispatcher.execCompareTrigger(target, method, content, headers);
 
 	},
 
-	execMultiTest: function(test, pattern) {
+	execMultiCompare: function(test, pattern) {
 
 		var target = dispatcher.getTestTarget(test);
 
@@ -95,18 +88,19 @@ var dispatcher = {
 
 			headers = typeof pattern.tests[t].send.headers == "object" ? pattern.tests[t].send.headers : {};
 
-			dispatcher.execTestTrigger(target, method, content, headers);
+			dispatcher.execCompareTrigger(target, method, content, headers);
 
 		}
 
 	},
 
-	execTestTrigger: function(target, method, content, headers) {
+	execCompareTrigger: function(target, method, content, headers) {
 
 		var myCall = $.ajax(target, {
 			type: method,
 			data: content,
-			headers: headers
+			headers: headers,
+			async: false,
 		}).done(function(data, textStatus, jqXHR) {
 
 			dispatcher.parseResult(jqXHR, pattern);
@@ -129,7 +123,7 @@ var dispatcher = {
 
 		$(".main").append('<table class="table table-striped" id="performance_'+test+'"><thead><tr><th>#</th><th>Request Elaboration Time (sec)</th><th>Routing Time (sec)</th><th>Service Exec Time (sec)</th><th>Total Time (sec)</th></tr></thead><tbody></tbody></table>');
 
-		dispatcher.totalUnitTests += total;
+		dispatcher.totalUnitTests += times;
 
 		dispatcher.execPerformanceTrigger(times+1, iter, delay, pattern, test);
 
@@ -158,7 +152,8 @@ var dispatcher = {
 		var myCall = $.ajax(target, {
 			type: method,
 			data: content,
-			headers: headers
+			headers: headers,
+			async: false,
 		}).done(function(data, textStatus, jqXHR) {
 
 			if ( $('#performance_'+test).is("table") ) {
@@ -185,6 +180,63 @@ var dispatcher = {
 				dispatcher.totalUnitTests_fail += 1;
 
 			}
+
+		});
+
+	},
+
+	execCall: function(test, pattern) {
+
+		var target = dispatcher.getTestTarget(test);
+
+		var method = typeof pattern.send.method == "string" ? pattern.send.method : 'GET';
+
+		var content = typeof pattern.send.content != "undefined" ? pattern.send.content : null;
+
+		var headers = typeof pattern.send.headers == "object" ? pattern.send.headers : {};
+
+		dispatcher.totalUnitTests = 1;
+
+		dispatcher.execCallTrigger(target, method, content, headers, test);
+
+	},
+
+	execMultiCall: function(test, patterm) {
+
+		var target = dispatcher.getTestTarget(test);
+
+		var t, method, content, headers;
+
+		for (var t in pattern.tests) {
+
+			method = typeof pattern.tests[t].send.method == "string" ? pattern.tests[t].send.method : 'GET';
+
+			content = typeof pattern.tests[t].send.content != "undefined" ? pattern.tests[t].send.content : null;
+
+			headers = typeof pattern.tests[t].send.headers == "object" ? pattern.tests[t].send.headers : {};
+
+			dispatcher.totalUnitTests += 1;
+
+			dispatcher.execCallTrigger(target, method, content, headers, test);
+
+		}
+
+	},
+
+	execCallTrigger: function(target, method, content, headers, test) {
+
+		$.ajax(target, {
+			type: method,
+			data: content,
+			headers: headers,
+			async: false,
+		}).done(function(data, textStatus, jqXHR) {
+
+			dispatcher.parseCall(jqXHR, test, true);
+
+		}).fail(function(jqXHR, textStatus, errorThrown) {
+
+			dispatcher.parseCall(jqXHR, test, false);
 
 		});
 
@@ -329,6 +381,29 @@ var dispatcher = {
 
 	},
 
+	parseCall: function(xhr, test, success) {
+
+		var rstatus = xhr.statusCode().status;
+
+		var content = xhr.statusCode().responseText;
+
+		if (success) {
+
+			dispatcher.totalUnitTests_success += 1;
+
+		}
+		else {
+
+			dispatcher.totalUnitTests_fail += 1;
+
+		}
+
+		$(".main").append('<p>Test call: <mark>'+test+'</mark></p>');
+
+		$(".main").append('<div class="bs-callout bs-callout-'+(success ? 'success' : 'danger')+'"><span class="glyphicon glyphicon-'+(success ? 'ok' : 'remove')+'" style="float:right;"></span><h4>Test result</h4><code>'+content+'</code></div></div>');
+
+	},
+
 	routeTest: function(test) {
 
 		dispatcher.totalUnitTests = 0;
@@ -343,23 +418,51 @@ var dispatcher = {
 
 			$(".main").html('<h1 class="page-header">Testing: <span style="italic">'+test+'</span></h1><h3><small>'+pattern.description+'</small></h3>');
 
-			if ( pattern.type == "performance" ) {
+			switch (pattern.type) {
 
-				dispatcher.execPerformance(test, pattern);
+				case "compare":
 
-			}
-			else if ( pattern.type == "multicompare" ) {
+					dispatcher.execCompare(test, pattern);
 
-				dispatcher.execMultiTest(test, pattern);
+					dispatcher.testReport();
 
-				dispatcher.testReport();
-				
-			}
-			else {
+					break;
 
-				dispatcher.execTest(test, pattern);
+				case "multicompare":
 
-				dispatcher.testReport();
+					dispatcher.execMultiCompare(test, pattern);
+
+					dispatcher.testReport();
+
+					break;
+
+				case "call":
+
+					dispatcher.execCall(test, pattern);
+
+					dispatcher.testReport();
+
+					break;
+
+				case "multicall":
+
+					dispatcher.execMulticCall(test, pattern);
+
+					dispatcher.testReport();
+
+					break;
+
+				case "performance":
+
+					dispatcher.execPerformance(test, pattern);
+
+					break;
+
+				default:
+
+					$(".main").html("<h3>Test not runnable (wrong type)</h3>");
+
+					break;
 
 			}
 
@@ -410,13 +513,19 @@ var dispatcher = {
 
 $(function(){
 
-	dispatcher.loadTests();
+	if (!window.location.origin) {
+		window.location.origin = window.location.protocol+"//"+window.location.host;
+	}
 
-	if ( dispatcher.tests.length == 0 ) { return; }
+	dispatcher.loadTests().done( function( json ) {
 
-	dispatcher.publishTests();
+		dispatcher.tests = json;
 
-	$('.nav-sidebar a').click(function(evt) {
+		dispatcher.publishTests();
+
+		$("<style type='text/css'> .bs-callout { margin: 20px 0; padding: 15px 30px 15px 15px; border-left: 5px solid #eee; } .bs-callout h4 { margin-top: 0; } .bs-callout p:last-child { margin-bottom: 0; } .bs-callout code, .bs-callout .highlight { background-color: #fff; } .bs-callout-danger { background-color: #fcf2f2; border-color: #dFb5b4; } .bs-callout-warning { background-color: #fefbed; border-color: #f1e7bc; } .bs-callout-info { background-color: #f0f7fd; border-color: #d0e3f0; } .bs-callout-success { background-color: #f0f7fd; border-color: #3c763d; } </style>").appendTo("head");
+
+		$('.nav-sidebar a').click(function(evt) {
 		var target = evt.target.href;
 		target = target.replace( /^[^#]*#?(.*)$/, '$1' );
 		if ( target == "" ) {
@@ -427,10 +536,11 @@ $(function(){
 		}
 	});
 
-	if (!window.location.origin) {
-		window.location.origin = window.location.protocol+"//"+window.location.host;
-	}
+	}).fail(function( jqxhr, textStatus, error ) {
+		
+		var err = textStatus + ", " + error;
+		alert( "Error loading tests: " + err );
 
-	$("<style type='text/css'> .bs-callout { margin: 20px 0; padding: 15px 30px 15px 15px; border-left: 5px solid #eee; } .bs-callout h4 { margin-top: 0; } .bs-callout p:last-child { margin-bottom: 0; } .bs-callout code, .bs-callout .highlight { background-color: #fff; } .bs-callout-danger { background-color: #fcf2f2; border-color: #dFb5b4; } .bs-callout-warning { background-color: #fefbed; border-color: #f1e7bc; } .bs-callout-info { background-color: #f0f7fd; border-color: #d0e3f0; } .bs-callout-success { background-color: #f0f7fd; border-color: #3c763d; } </style>").appendTo("head");
+	});
 
 });
