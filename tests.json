@@ -1,36 +1,240 @@
 {
-	"test1": {
-		"description": "test of tests",
+	"test_httpmethods": {
+		"name": "HTTP methods",
+		"description": "This test simply launch GET, PUT, POST and DELETE requests",
+		"type": "multicall",
+		"tests": [
+			{
+				"send": {
+					"method": "GET",
+					"content": {
+						"this": "is",
+						"a": "test"
+					}
+				}
+			},
+			{
+				"send": {
+					"method": "PUT"
+				}
+			},
+			{
+				"send": {
+					"method": "POST",
+					"content": {
+						"this": "is",
+						"a": "test"
+					}
+				}
+			},
+			{
+				"send": {
+					"method": "DELETE"
+				}
+			}
+		]
+	},
+	"test_supportedmethods": {
+		"name": "Supported only methods",
+		"description": "Supported only methods",
+		"type": "multicompare",
+		"tests": [
+			{
+				"send": {
+					"method": "GET"
+				},
+				"receive": {
+					"status": 405
+				}
+			},
+			{
+				"send": {
+					"method": "PUT"
+				},
+				"receive": {
+					"status": 405
+				}
+			},
+			{
+				"send": {
+					"method": "POST"
+				},
+				"receive": {
+					"status": 405
+				}
+			},
+			{
+				"send": {
+					"method": "DELETE"
+				},
+				"receive": {
+					"status": 200
+				}
+			}
+		]
+	},
+	"test_anymethod": {
+		"name": "Responses to any method (wildcard)",
+		"description": "Responses to any method (wildcard)",
+		"type": "multicompare",
+		"tests": [
+			{
+				"send": {
+					"method": "GET"
+				},
+				"receive": {
+					"status": 200,
+					"response": [
+						{
+							"rule": "contain",
+							"content": "GET"
+						}
+					]
+				}
+			},
+			{
+				"send": {
+					"method": "PUT"
+				},
+				"receive": {
+					"status": 200,
+					"response": [
+						{
+							"rule": "contain",
+							"content": "PUT"
+						}
+					]
+				}
+			},
+			{
+				"send": {
+					"method": "POST"
+				},
+				"receive": {
+					"status": 200,
+					"response": [
+						{
+							"rule": "contain",
+							"content": "POST"
+						}
+					]
+				}
+			},
+			{
+				"send": {
+					"method": "DELETE"
+				},
+				"receive": {
+					"status": 200,
+					"response": [
+						{
+							"rule": "contain",
+							"content": "DELETE"
+						}
+					]
+				}
+			}
+		]
+	},
+	"test_nocontent": {
+		"name": "No content replies",
+		"description": "No content replies",
+		"type": "multicompare",
+		"tests": [
+			{
+				"send": {
+					"method": "GET"
+				},
+				"receive": {
+					"status": 204
+				}
+			},
+			{
+				"send": {
+					"method": "PUT"
+				},
+				"receive": {
+					"status": 202
+				}
+			},
+			{
+				"send": {
+					"method": "POST"
+				},
+				"receive": {
+					"status": 204
+				}
+			},
+			{
+				"send": {
+					"method": "DELETE"
+				},
+				"receive": {
+					"status": 204
+				}
+			}
+		]
+	},
+	"test_rawparameters": {
+		"name": "Get raw parameters from POST",
+		"description": "Get raw parameters from POST",
+		"type": "call",
+		"send": {
+			"method": "POST",
+			"content": {
+				"this": "is",
+				"a": "test"
+			}
+		}
+	},
+	"test_exception": {
+		"name": "Dispatcher Exception",
+		"description": "Dispatcher Exception with 400 error code",
 		"type": "compare",
-		"send": {},
+		"send": {
+			"method": "GET"
+		},
+		"receive": {
+			"status": 400
+		}
+	},
+	"test_headerinject": {
+		"name": "Header inject",
+		"description": "Header inject",
+		"type": "compare",
+		"send": {
+			"method": "GET"
+		},
 		"receive": {
 			"status": 200,
 			"headers": [
 				{
-					"header": "Content-Length",
-					"value": 22
+					"header": "C-Inject-setup",
+					"value": "foo"
 				},{
-					"header": "foo-Length",
-					"value": "bla"
-				}
-			],
-			"response": [
-				{
-					"rule": "match",
-					"content": "this is a test message"
+					"header": "C-Inject-get",
+					"value": "boo"
 				},{
-					"rule": "!contain",
-					"content": "foo"
+					"header": "C-Inject-router",
+					"value": "koo"
 				}
 			]
 		}
 	},
-	"test2": {
-		"description": "test performance",
+	"test_performance": {
+		"name": "Dispatcher performance",
+		"description": "Dispatcher performance",
+		"type": "performance",
+		"times": 10,
+		"delay": 500,
+		"send": {}
+	},
+	"test_cache": {
+		"name": "Dispatcher server cache",
+		"description": "Call special service test_cache that sleeps for 2 seconds and is configured (routing-side) with cache and a TTL=3sec. Dispatcher should report exec-time and total-time lower in 8 of 10 tests (when cache is still valid).",
 		"type": "performance",
 		"times": 10,
 		"delay": 500,
 		"send": {}
 	}
-
 }

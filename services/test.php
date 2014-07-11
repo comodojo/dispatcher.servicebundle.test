@@ -22,7 +22,9 @@ class test extends service {
 
 		$template->setContent("<h1>Test content here</h1>");
 
-		$template->addScript(DISPATCHER_BASEURL."vendor/comodojo/dispatcher.servicebundle.test/resources/js/dispatcher.test.js");
+		$template->addScript(DISPATCHER_BASEURL."vendor/comodojo/dispatcher.servicebundle.test/resources/js/dispatcher.test.js?".microtime());
+
+		$template->addScript(DISPATCHER_BASEURL."vendor/comodojo/dispatcher.servicebundle.test/resources/js/dispatcher.working.mode.js.php?rw=".(DISPATCHER_USE_REWRITE ? '1' : '0').'&'.microtime());
 
 		return $template->serialize();
 

@@ -14,6 +14,64 @@
                 "service": "test",
                 "type": "ROUTE",
                 "target": "test.php"
+            },
+            {
+                "service": "test_httpmethods",
+                "type": "ROUTE",
+                "target": "test_httpmethods.php"
+            },
+            {
+                "service": "test_supportedmethods",
+                "type": "ROUTE",
+                "target": "test_supportedmethods.php"
+            },
+            {
+                "service": "test_anymethod",
+                "type": "ROUTE",
+                "target": "test_anymethod.php"
+            },
+            {
+                "service": "test_nocontent",
+                "type": "ROUTE",
+                "target": "test_nocontent.php"
+            },
+            {
+                "service": "test_rawparameters",
+                "type": "ROUTE",
+                "target": "test_rawparameters.php"
+            },
+            {
+                "service": "test_exception",
+                "type": "ROUTE",
+                "target": "test_exception.php"
+            },
+            {
+                "service": "test_performance",
+                "type": "ROUTE",
+                "target": "test_httpmethods.php",
+                "parameters": {
+                    "perform": true
+                }
+            },
+            {
+                "service": "test_cache",
+                "type": "ROUTE",
+                "target": "test_cache.php",
+                "parameters": {
+                    "perform": true,
+                    "cache": "SERVER",
+                    "ttl": 3
+                }
+            },
+            {
+                "service": "test_headerinject",
+                "type": "ROUTE",
+                "target": "test_headerinject.php",
+                "parameters": {
+                    "headers": {
+                        "C-Inject-router": "koo"
+                    }
+                }
             }
         ]
     },

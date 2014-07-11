@@ -22,7 +22,7 @@ var dispatcher = {
 
 		for (var i in dispatcher.tests) {
 			
-			menu += '<li id="menu_'+i+'"><a href="#'+i+'">'+dispatcher.tests[i].description+'</a></li>'
+			menu += '<li id="menu_'+i+'"><a href="#'+i+'">'+dispatcher.tests[i].name+'</a></li>'
 
 		};
 
@@ -70,7 +70,7 @@ var dispatcher = {
 
 		var headers = typeof pattern.send.headers == "object" ? pattern.send.headers : {};
 
-		dispatcher.execCompareTrigger(target, method, content, headers);
+		dispatcher.execCompareTrigger(target, method, content, headers, pattern);
 
 	},
 
@@ -88,17 +88,29 @@ var dispatcher = {
 
 			headers = typeof pattern.tests[t].send.headers == "object" ? pattern.tests[t].send.headers : {};
 
-			dispatcher.execCompareTrigger(target, method, content, headers);
+			dispatcher.execCompareTrigger(target, method, content, headers, pattern.tests[t]);
 
 		}
 
 	},
 
-	execCompareTrigger: function(target, method, content, headers) {
+	execCompareTrigger: function(target, method, content, headers, pattern) {
 
-		var myCall = $.ajax(target, {
-			type: method,
-			data: content,
+		var data, cdata = '', mymethod = method.toUpperCase();
+
+		if ( dispatcher.rewrite && mymethod == "GET" && typeof content == "object") {
+			data = null;
+			for (var i in content) {
+				cdata += content[i]+'/';
+			}
+		}
+		else {
+			data = content;
+		}
+
+		$.ajax(target+cdata, {
+			type: mymethod,
+			data: data,
 			headers: headers,
 			async: false,
 		}).done(function(data, textStatus, jqXHR) {
@@ -149,9 +161,21 @@ var dispatcher = {
 
 		var headers = typeof pattern.send.headers == "object" ? pattern.send.headers : {};
 
-		var myCall = $.ajax(target, {
-			type: method,
-			data: content,
+		var data, cdata = '', mymethod = method.toUpperCase();
+
+		if ( dispatcher.rewrite && mymethod == "GET" && typeof content == "object") {
+			data = null;
+			for (var i in content) {
+				cdata += content[i]+'/';
+			}
+		}
+		else {
+			data = content;
+		}
+
+		$.ajax(target+cdata, {
+			type: mymethod,
+			data: data,
 			headers: headers,
 			async: false,
 		}).done(function(data, textStatus, jqXHR) {
@@ -225,9 +249,21 @@ var dispatcher = {
 
 	execCallTrigger: function(target, method, content, headers, test) {
 
-		$.ajax(target, {
-			type: method,
-			data: content,
+		var data, cdata = '', mymethod = method.toUpperCase();
+
+		if ( dispatcher.rewrite && mymethod == "GET" && typeof content == "object") {
+			data = null;
+			for (var i in content) {
+				cdata += content[i]+'/';
+			}
+		}
+		else {
+			data = content;
+		}
+
+		$.ajax(target+cdata, {
+			type: mymethod,
+			data: data,
 			headers: headers,
 			async: false,
 		}).done(function(data, textStatus, jqXHR) {
@@ -446,7 +482,7 @@ var dispatcher = {
 
 				case "multicall":
 
-					dispatcher.execMulticCall(test, pattern);
+					dispatcher.execMultiCall(test, pattern);
 
 					dispatcher.testReport();
 
