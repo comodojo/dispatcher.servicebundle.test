@@ -267,6 +267,31 @@
 			"method": "GET"
 		}
 	},
+	"test_notexistentroute": {
+		"name": "Custom 404",
+		"description": "Call a not existent service to generate a 404 error",
+		"type": "compare",
+		"send": {
+			"method": "GET"
+		},
+		"receive": {
+			"status": 404,
+			"response": [
+				{
+					"rule": "contain",
+					"content": "404"
+				}
+			]
+		}
+	},
+	"test_route_second": {
+		"name": "Test Autoroute",
+		"description": "Route to a not-defined service. THIS WILL WORK ONLY IF autoroute is enabled AND service 'test_route_second.php' is in the default service folder.",
+		"type": "call",
+		"send": {
+			"method": "GET"
+		}
+	},
 	"test_performance": {
 		"name": "Dispatcher performance",
 		"description": "Dispatcher performance",
