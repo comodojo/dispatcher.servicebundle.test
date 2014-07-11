@@ -72,12 +72,28 @@
                         "C-Inject-router": "koo"
                     }
                 }
+            },
+            {
+                "service": "test_route_first",
+                "type": "ROUTE",
+                "target": "test_route_first.php"
+            },
+            {
+                "service": "test_route_first",
+                "type": "ROUTE",
+                "target": "test_route_first.php"
+            },
+            {
+                "service": "test_addattribute",
+                "type": "ROUTE",
+                "target": "test_httpmethods.php"
             }
         ]
     },
     "require": {
         "comodojo/dispatcher.template.bootstrap": "dev-master",
         "comodojo/dispatcher.servicebundle.default": "dev-master",
-        "comodojo/dispatcher.plugin.performer": "dev-master"
+        "comodojo/dispatcher.plugin.performer": "dev-master",
+        "comodojo/dispatcher.plugin.test": "dev-master"
     }
 }
