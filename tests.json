@@ -221,6 +221,52 @@
 			]
 		}
 	},
+	"test_route_first": {
+		"name": "Conditional routing (header)",
+		"description": "This test should produce a different output (due to different route target) injected by a conditional route on request header",
+		"type": "multicompare",
+		"tests": [
+			{
+				"send": {
+					"method": "GET"
+				},
+				"receive": {
+					"status": 200,
+					"response": [
+						{
+							"rule": "contain",
+							"content": "FIRST"
+						}
+					]
+				}
+			},
+			{
+				"send": {
+					"method": "GET",
+					"headers": {
+						"C-Conditional-route": true
+					}
+				},
+				"receive": {
+					"status": 200,
+					"response": [
+						{
+							"rule": "contain",
+							"content": "SECOND"
+						}
+					]
+				}
+			}
+		]
+	},
+	"test_addattribute": {
+		"name": "Router-side attribute inject",
+		"description": "Router-side attribute inject",
+		"type": "call",
+		"send": {
+			"method": "GET"
+		}
+	},
 	"test_performance": {
 		"name": "Dispatcher performance",
 		"description": "Dispatcher performance",
