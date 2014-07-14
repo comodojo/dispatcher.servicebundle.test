@@ -92,7 +92,6 @@
     },
     "require": {
         "comodojo/dispatcher.template.bootstrap": "dev-master",
-        "comodojo/dispatcher.servicebundle.default": "dev-master",
         "comodojo/dispatcher.plugin.performer": "dev-master",
         "comodojo/dispatcher.plugin.test": "dev-master"
     }
