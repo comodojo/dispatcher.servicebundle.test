@@ -99,7 +99,43 @@
                 "service": "test_addattribute",
                 "type": "ROUTE",
                 "target": "test_httpmethods.php"
-            }
+            },
+            {
+                "service": "test_multi_redirect",
+                "type": "REDIRECT",
+                "target": "test_redirect_1",
+                "relative": true,
+                "parameters": {
+                    "redirectCode": 301
+                }
+            },
+            {
+                "service": "test_redirect_1",
+                "type": "REDIRECT",
+                "target": "test_redirect_2",
+                "relative": true,
+                "parameters": {
+                    "redirectCode": 302
+                }
+            },
+            {
+                "service": "test_redirect_2",
+                "type": "REDIRECT",
+                "target": "test_redirect_3",
+                "relative": true,
+                "parameters": {
+                    "redirectCode": 303
+                }
+            },
+            {
+                "service": "test_redirect_3",
+                "type": "REDIRECT",
+                "target": "test_httpmethods",
+                "relative": true,
+                "parameters": {
+                    "redirectCode": 307
+                }
+            },
         ]
     },
     "require": {

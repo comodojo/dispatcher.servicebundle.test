@@ -284,6 +284,14 @@
 			]
 		}
 	},
+	"test_multi_redirect": {
+		"name": "Test multiple redirect",
+		"description": "Content should be loaded after 4 different redirect (301, 302, 303, 307)",
+		"type": "call",
+		"send": {
+			"method": "GET"
+		}
+	},
 	"test_route_second": {
 		"name": "Test Autoroute",
 		"description": "Route to a not-defined service. THIS WILL WORK ONLY IF autoroute is enabled AND service 'test_route_second.php' is in the default service folder.",
