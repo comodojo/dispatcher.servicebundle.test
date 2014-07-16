@@ -286,7 +286,7 @@
 	},
 	"test_multi_redirect": {
 		"name": "Test multiple redirect",
-		"description": "Content should be loaded after 4 different redirect (301, 302, 303, 307)",
+		"description": "Content should be loaded after 4 different redirects (301, 302, 303, 307)",
 		"type": "call",
 		"send": {
 			"method": "GET"
