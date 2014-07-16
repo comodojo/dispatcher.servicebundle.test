@@ -135,7 +135,7 @@
                 "parameters": {
                     "redirectCode": 307
                 }
-            },
+            }
         ]
     },
     "require": {
