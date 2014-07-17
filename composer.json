@@ -101,6 +101,11 @@
                 "target": "test_httpmethods.php"
             },
             {
+                "service": "test_httprequest",
+                "type": "ROUTE",
+                "target": "test_httprequest.php"
+            },
+            {
                 "service": "test_multi_redirect",
                 "type": "REDIRECT",
                 "target": "test_redirect_1",
@@ -141,6 +146,7 @@
     "require": {
         "comodojo/dispatcher.template.bootstrap": "dev-master",
         "comodojo/dispatcher.plugin.performer": "dev-master",
-        "comodojo/dispatcher.plugin.test": "dev-master"
+        "comodojo/dispatcher.plugin.test": "dev-master",
+        "comodojo/dispatcher.library.httprequest": "dev-master"
     }
 }

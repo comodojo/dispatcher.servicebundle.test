@@ -292,6 +292,14 @@
 			"method": "GET"
 		}
 	},
+	"test_httprequest": {
+		"name": "PLUGIN - httprequest",
+		"description": "Test plugin httprequest asking google maps to find the Colosseum (JSON)",
+		"type": "call",
+		"send": {
+			"method": "GET"
+		}
+	},
 	"test_route_second": {
 		"name": "Test Autoroute",
 		"description": "Route to a not-defined service. THIS WILL WORK ONLY IF autoroute is enabled AND service 'test_route_second.php' is in the default service folder.",
