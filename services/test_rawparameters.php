@@ -1,19 +1,17 @@
-<?php namespace comodojo\Dispatcher\Service;
+<?php namespace Comodojo\Dispatcher\Service;
 
 class test_rawparameters extends service {
-	
-	public function setup() {
+    
+    public function setup() {
 
-		$this->setContentType("text/html");
+        $this->setContentType("text/html");
 
-	}
+    }
 
-	public function post() {
+    public function post() {
 
-		return $this->getParameters(true);
+        return $this->getParameters(true);
 
-	}
+    }
 
 }
-
-?>

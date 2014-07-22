@@ -1,13 +1,11 @@
-<?php namespace comodojo\Dispatcher\Service;
+<?php namespace Comodojo\Dispatcher\Service;
 
 class test_route_second extends service {
-	
-	public function get() {
+    
+    public function get() {
 
-		return "This is the SECOND route";
+        return "This is the SECOND route";
 
-	}
+    }
 
 }
-
-?>

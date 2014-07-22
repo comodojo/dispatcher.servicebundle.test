@@ -1,13 +1,11 @@
-<?php namespace comodojo\Dispatcher\Service;
+<?php namespace Comodojo\Dispatcher\Service;
 
 class test_exception extends service {
-	
-	public function get() {
+    
+    public function get() {
 
-		throw new \comodojo\Exception\DispatcherException("Error Processing Request", 400);
+        throw new \Comodojo\Exception\DispatcherException("Error Processing Request", 400);
 
-	}
+    }
 
 }
-
-?>

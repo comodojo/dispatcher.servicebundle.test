@@ -1,19 +1,17 @@
-<?php namespace comodojo\Dispatcher\Service;
+<?php namespace Comodojo\Dispatcher\Service;
 
 class test_supportedmethods extends service {
-	
-	public function setup() {
+    
+    public function setup() {
 
-		$this->setSupportedMethods("DELETE");
+        $this->setSupportedMethods("DELETE");
 
-	}
+    }
 
-	public function delete() {
+    public function delete() {
 
-		return "DELETE method supported";
+        return "DELETE method supported";
 
-	}
+    }
 
 }
-
-?>

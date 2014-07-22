@@ -1,27 +1,25 @@
-<?php namespace comodojo\Dispatcher\Service;
+<?php namespace Comodojo\Dispatcher\Service;
 
 class test_expected extends service {
-	
-	public function setup() {
+    
+    public function setup() {
 
-		$this->expects("GET", Array("foo", "bar"));
+        $this->expects("GET", Array("foo", "bar"));
 
-		$this->expects("POST", Array(), Array("baz", "taz"));
+        $this->expects("POST", Array(), Array("baz", "taz"));
 
-	}
+    }
 
-	public function get() {
+    public function get() {
 
-		return "Intresting conversation using GET";
+        return "Intresting conversation using GET";
 
-	}
+    }
 
-	public function post() {
+    public function post() {
 
-		return "Intresting conversation using POST";
+        return "Intresting conversation using POST";
 
-	}
+    }
 
 }
-
-?>

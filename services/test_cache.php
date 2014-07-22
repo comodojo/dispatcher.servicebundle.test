@@ -1,34 +1,32 @@
-<?php namespace comodojo\Dispatcher\Service;
+<?php namespace Comodojo\Dispatcher\Service;
 
 class test_cache extends service {
-	
-	public function setup() {
+    
+    public function setup() {
 
-		$this->setContentType("application/json");
+        $this->setContentType("application/json");
 
-	}
+    }
 
-	public function any() {
+    public function any() {
 
-		$return = $this->test();
+        $return = $this->test();
 
-		sleep(2);
+        sleep(2);
 
-		return $this->serialize->toJSON($return);
+        return $this->serialize->toJSON($return);
 
-	}
+    }
 
-	private function test() {
+    private function test() {
 
-		return Array(
-			"METHOD"		=>	"ANY",
-			"HTTPMETHOD"	=>	$_SERVER['REQUEST_METHOD'],
-			"ATTRIBUTES"	=>	$this->getAttributes(),
-			"PARAMETERS"	=>	$this->getParameters()
-		);
+        return Array(
+            "METHOD"        =>  "ANY",
+            "HTTPMETHOD"    =>  $_SERVER['REQUEST_METHOD'],
+            "ATTRIBUTES"    =>  $this->getAttributes(),
+            "PARAMETERS"    =>  $this->getParameters()
+        );
 
-	}
+    }
 
 }
-
-?>

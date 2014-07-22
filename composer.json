@@ -147,6 +147,6 @@
         "comodojo/dispatcher.template.bootstrap": "dev-master",
         "comodojo/dispatcher.plugin.performer": "dev-master",
         "comodojo/dispatcher.plugin.test": "dev-master",
-        "comodojo/dispatcher.library.httprequest": "dev-master"
+        "comodojo/httprequest": "dev-master"
     }
 }

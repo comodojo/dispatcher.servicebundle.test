@@ -1,27 +1,25 @@
-<?php namespace comodojo\Dispatcher\Service;
+<?php namespace Comodojo\Dispatcher\Service;
 
 class test_liked extends service {
-	
-	public function setup() {
+    
+    public function setup() {
 
-		$this->likes("GET", Array("foo", "bar"));
+        $this->likes("GET", Array("foo", "bar"));
 
-		$this->likes("POST", Array(), Array("baz", "taz"));
+        $this->likes("POST", Array(), Array("baz", "taz"));
 
-	}
+    }
 
-	public function get() {
+    public function get() {
 
-		return var_export($this->getAttributes(), true);
+        return var_export($this->getAttributes(), true);
 
-	}
+    }
 
-	public function post() {
+    public function post() {
 
-		return var_export($this->getParameters(), true);
+        return var_export($this->getParameters(), true);
 
-	}
+    }
 
 }
-
-?>
