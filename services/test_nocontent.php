@@ -1,6 +1,6 @@
 <?php namespace Comodojo\Dispatcher\Service;
 
-class test_nocontent extends service {
+class test_nocontent extends Service {
     
     public function setup() {
 

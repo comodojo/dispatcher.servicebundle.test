@@ -1,6 +1,6 @@
 <?php namespace Comodojo\Dispatcher\Service;
 
-class test_expected extends service {
+class test_expected extends Service {
     
     public function setup() {
 

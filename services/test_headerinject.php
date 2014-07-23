@@ -1,6 +1,6 @@
 <?php namespace Comodojo\Dispatcher\Service;
 
-class test_headerinject extends service {
+class test_headerinject extends Service {
     
     public function setup() {
 

@@ -2,7 +2,7 @@
 
 use Comodojo\Httprequest\Httprequest;
 
-class test_httprequest extends service {
+class test_httprequest extends Service {
     
     public function setup() {
 
@@ -10,15 +10,17 @@ class test_httprequest extends service {
 
     public function get() {
 
+    	$logger = $this->getLogger();
+
         $http = new Httprequest("https://maps.googleapis.com/maps/api/geocode/json?address=Piazza%20del%20Colosseo+Roma");
 
-        $return = $http->setPort(443)->get();
+        $body = $http->setPort(443)->get();
 
-        $head = $http->getReceivedHeaders();
+        $header = $http->getReceivedHeaders();
 
-        $this->logger->debug($head);
+        $logger->debug('Response headers', $header);
 
-        return $return;
+        return $body;
 
     }
 

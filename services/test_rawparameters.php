@@ -1,6 +1,6 @@
 <?php namespace Comodojo\Dispatcher\Service;
 
-class test_rawparameters extends service {
+class test_rawparameters extends Service {
     
     public function setup() {
 

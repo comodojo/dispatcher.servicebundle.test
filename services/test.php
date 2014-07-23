@@ -2,7 +2,7 @@
 
 use \Comodojo\Dispatcher\Template\TemplateBootstrap;
 
-class test extends service {
+class test extends Service {
     
     public function setup() {
 

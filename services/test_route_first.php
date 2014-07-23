@@ -1,6 +1,6 @@
 <?php namespace Comodojo\Dispatcher\Service;
 
-class test_route_first extends service {
+class test_route_first extends Service {
     
     public function get() {
 

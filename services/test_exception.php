@@ -1,6 +1,6 @@
 <?php namespace Comodojo\Dispatcher\Service;
 
-class test_exception extends service {
+class test_exception extends Service {
     
     public function get() {
 
