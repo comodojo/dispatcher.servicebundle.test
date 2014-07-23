@@ -106,6 +106,21 @@
                 "target": "test_httprequest.php"
             },
             {
+                "service": "test_expected",
+                "type": "ROUTE",
+                "target": "test_expected.php"
+            },
+            {
+                "service": "test_liked",
+                "type": "ROUTE",
+                "target": "test_liked.php"
+            },
+            {
+                "service": "test_lotsofvalues",
+                "type": "ROUTE",
+                "target": "test_lotsofvalues.php"
+            },
+            {
                 "service": "test_multi_redirect",
                 "type": "REDIRECT",
                 "target": "test_redirect_1",
