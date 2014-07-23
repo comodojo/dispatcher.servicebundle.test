@@ -81,7 +81,7 @@
                 "target": "test_headerinject.php",
                 "parameters": {
                     "headers": {
-                        "C-Inject-router": "koo"
+                        "C-Inject-Router": "koo"
                     }
                 }
             },

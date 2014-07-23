@@ -405,13 +405,13 @@ var dispatcher = {
 
 	parsePerformance: function(xhr, iter, test) {
 
-		var request = xhr.getResponseHeader("D-Request-sec");
+		var request = xhr.getResponseHeader("D-Request-Sec");
 
-		var route = xhr.getResponseHeader("D-Route-sec");
+		var route = xhr.getResponseHeader("D-Route-Sec");
 
-		var result = xhr.getResponseHeader("D-Result-sec");
+		var result = xhr.getResponseHeader("D-Result-Sec");
 
-		var total = xhr.getResponseHeader("D-Total-sec");
+		var total = xhr.getResponseHeader("D-Total-Sec");
 
 		$('#performance_'+test+' > tbody:last').append('<tr><td>'+iter+'</td><td>'+parseFloat(request).toFixed(6)+'</td><td>'+parseFloat(route).toFixed(6)+'</td><td>'+parseFloat(result).toFixed(6)+'</td><td>'+parseFloat(total).toFixed(6)+'</td></tr>');
 

@@ -209,13 +209,13 @@
 			"status": 200,
 			"headers": [
 				{
-					"header": "C-Inject-setup",
+					"header": "C-Inject-Setup",
 					"value": "foo"
 				},{
-					"header": "C-Inject-get",
+					"header": "C-Inject-Set",
 					"value": "boo"
 				},{
-					"header": "C-Inject-router",
+					"header": "C-Inject-Router",
 					"value": "koo"
 				}
 			]
@@ -244,7 +244,7 @@
 				"send": {
 					"method": "GET",
 					"headers": {
-						"C-Conditional-route": true
+						"C-Conditional-Route": true
 					}
 				},
 				"receive": {
