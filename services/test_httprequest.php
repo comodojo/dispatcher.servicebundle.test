@@ -17,7 +17,7 @@ class test_httprequest extends Service {
         $body = $http->setPort(443)->get();
 
         $header = $http->getReceivedHeaders();
-
+        
         $logger->debug('Response headers', $header);
 
         return $body;
