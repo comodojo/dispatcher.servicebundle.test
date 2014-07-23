@@ -12,13 +12,17 @@ class test_liked extends Service {
 
     public function get() {
 
-        return var_export($this->getAttributes(), true);
+        $attributes =  $this->getAttributes();
+
+        return empty($attributes) ? "Nothing to show here" : var_export($attributes, true);
 
     }
 
     public function post() {
 
-        return var_export($this->getParameters(), true);
+        $parameters =  $this->getParameters();
+
+        return empty($parameters) ? "Nothing to show here" : var_export($parameters, true);
 
     }
 

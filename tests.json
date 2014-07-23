@@ -133,6 +133,20 @@
 						}
 					]
 				}
+			},
+			{
+				"send": {
+					"method": "OPTION"
+				},
+				"receive": {
+					"status": 405,
+					"response": [
+						{
+							"rule": "contain",
+							"content": "Allow"
+						}
+					]
+				}
 			}
 		]
 	},
@@ -175,8 +189,173 @@
 			}
 		]
 	},
+	"test_expected": {
+		"name": "Expected values",
+		"description": "This test should end in success or failure depending on provided attributes/parameters",
+		"type": "multicompare",
+		"tests": [
+			{
+				"send": {
+					"method": "GET"
+				},
+				"receive": {
+					"status": 400,
+					"response": [
+						{
+							"rule": "match",
+							"content": "Conversation error"
+						}
+					]
+				}
+			},
+			{
+				"send": {
+					"method": "GET",
+					"content": ["is","test"]
+				},
+				"receive": {
+					"status": 200,
+					"response": [
+						{
+							"rule": "match",
+							"content": "Intresting conversation using GET"
+						}
+					]
+				}
+			},
+			{
+				"send": {
+					"method": "POST"
+				},
+				"receive": {
+					"status": 400,
+					"response": [
+						{
+							"rule": "match",
+							"content": "Conversation error"
+						}
+					]
+				}
+			},
+			{
+				"send": {
+					"method": "POST",
+					"content": {
+						"baz": "is",
+						"taz": "test"
+					}
+				},
+				"receive": {
+					"status": 200,
+					"response": [
+						{
+							"rule": "match",
+							"content": "Intresting conversation using POST"
+						}
+					]
+				}
+			}
+		]
+	},
+	"test_liked": {
+		"name": "Liked values",
+		"description": "Dispatcher should match (optional) attributes and parameters but not return a conversation error",
+		"type": "multicompare",
+		"tests": [
+			{
+				"send": {
+					"method": "GET"
+				},
+				"receive": {
+					"status": 200,
+					"response": [
+						{
+							"rule": "match",
+							"content": "Nothing to show here"
+						}
+					]
+				}
+			},
+			{
+				"send": {
+					"method": "GET",
+					"content": ["is","test"]
+				},
+				"receive": {
+					"status": 200,
+					"response": [
+						{
+							"rule": "contain",
+							"content": "foo"
+						}
+					]
+				}
+			},
+			{
+				"send": {
+					"method": "POST"
+				},
+				"receive": {
+					"status": 200,
+					"response": [
+						{
+							"rule": "match",
+							"content": "Nothing to show here"
+						}
+					]
+				}
+			},
+			{
+				"send": {
+					"method": "POST",
+					"content": {
+						"baz": "is",
+						"taz": "test"
+					}
+				},
+				"receive": {
+					"status": 200,
+					"response": [
+						{
+							"rule": "contain",
+							"content": "baz"
+						}
+					]
+				}
+			}
+		]
+	},
+	"test_lotsofvalues": {
+		"name": "Lots of values",
+		"description": "Dispatcher should match request attributes and parameters with expected/liked values",
+		"type": "multicall",
+		"tests": [
+			{
+				"send": {
+					"method": "GET",
+					"content": ["Lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipisicing", "elit", "sed", "do", "eiusmod", "tempor", "incididunt", "ut", "labore", "et", "dolore", "magna", "aliqua"]
+				}
+			},
+			{
+				"send": {
+					"method": "POST",
+					"content": { 
+						"Lorem": "ipsum",
+						"dolor": "sit",
+						"amet": "consectetur",
+						"adipisicing": "elit",
+						"sed": "do",
+						"eiusmod": "tempor",
+						"incididunt": "ut", 
+						"labore": "et",
+						"dolore": "magna aliqua"
+					}
+				}
+			}
+		]
+	},
 	"test_rawparameters": {
-		"name": "Get raw parameters from POST",
+		"name": "Raw parameters",
 		"description": "Get raw parameters from POST",
 		"type": "call",
 		"send": {
@@ -212,7 +391,7 @@
 					"header": "C-Inject-Setup",
 					"value": "foo"
 				},{
-					"header": "C-Inject-Set",
+					"header": "C-Inject-Get",
 					"value": "boo"
 				},{
 					"header": "C-Inject-Router",
