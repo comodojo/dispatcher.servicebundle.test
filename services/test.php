@@ -4,21 +4,36 @@ use \Comodojo\Dispatcher\Template\TemplateBootstrap;
 
 class test extends Service {
     
+    // private $available_themes = array(
+    //     "amelia", "cerulean", "cosmo", "custom", "cyborg", "darkly",
+    //     "default", "flatly", "journal", "lumen", "readable", "simplex",
+    //     "slate", "spacelab", "superhero", "united", "yeti"
+    // );
+
     public function setup() {
 
         $this->setContentType("text/html");
+
+        // $this->likes("GET",array("theme"));
 
     }
 
     public function get() {
 
-        $template = new TemplateBootstrap("dash");
+        // $attributes = $this->getAttributes();
+
+        // if ( isset($attributes['theme']) ) $theme = in_array($attributes['theme'], $this->available_themes) ? $attributes['theme'] : "default";
+        // else $theme = "default";
+
+        $theme = "default";
+
+        $template = new TemplateBootstrap("dash", $theme);
 
         $template->setTitle("Comodojo dispatcher")->setBrand("comodojo/dispatcher");
 
-        $template->addMenuItem("Test", DISPATCHER_BASEURL."test/");
-
-        $template->addMenuItem("About", DISPATCHER_BASEURL."about/", "right");
+        $template->addMenu("right")
+                 ->addMenuItem("Test", DISPATCHER_BASEURL."test/", "right")
+                 ->addMenuItem("About", DISPATCHER_BASEURL."about/", "right");
 
         $template->setContent("<h1>Test content here</h1>");
 
