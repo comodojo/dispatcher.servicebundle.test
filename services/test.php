@@ -29,11 +29,25 @@ class test extends Service {
 
         $template = new TemplateBootstrap("dash", $theme);
 
-        $template->setTitle("Comodojo dispatcher")->setBrand("comodojo/dispatcher");
+        if ( DISPATCHER_USE_REWRITE ) {
+
+            $test_link  = DISPATCHER_BASEURL.'test/';
+
+            $about_link = DISPATCHER_BASEURL.'about/';
+
+        } else {
+
+            $test_link  = DISPATCHER_BASEURL.'?service=test';
+
+            $about_link = DISPATCHER_BASEURL.'?service=about';
+
+        }
+
+        $template->setTitle("Comodojo dispatcher")->setBrand("comodojo::dispatcher");
 
         $template->addMenu("right")
-                 ->addMenuItem("Test", DISPATCHER_BASEURL."test/", "right")
-                 ->addMenuItem("About", DISPATCHER_BASEURL."about/", "right");
+                 ->addMenuItem("Test", $test_link, "right")
+                 ->addMenuItem("About", $about_link, "right");
 
         $template->setContent("<h1>Test content here</h1>");
 

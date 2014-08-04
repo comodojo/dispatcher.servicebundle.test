@@ -10,7 +10,7 @@ var dispatcher = {
 
 	loadTests: function() {
 
-		var basepath = location.href.split("/test/");
+		var basepath = dispatcher.rewrite ? location.href.split("/test/") : location.href.split("?service=test");
 
 		return $.getJSON( basepath[0]+"/vendor/comodojo/dispatcher.servicebundle.test/tests.json", {} );
 
@@ -50,13 +50,27 @@ var dispatcher = {
 
 		var path = "/";
 
-		for ( var i = 1; i < paths.length-2; i++ ) {
+		if (dispatcher.rewrite) {
 
-			path += paths[i]+"/";
+			for ( var i = 1; i < paths.length-2; i++ ) {
+
+				path += paths[i]+"/";
+
+			}
+
+			return window.location.origin+path+test+"/";
+
+		} else {
+
+			for ( var i = 1; i < paths.length-1; i++ ) {
+
+				path += paths[i]+"/";
+
+			}
+
+			return window.location.origin+path+"?service="+test;
 
 		}
-
-		return window.location.origin+path+test+"/";
 
 	},
 
@@ -98,10 +112,10 @@ var dispatcher = {
 
 		var data, cdata = '', mymethod = method.toUpperCase();
 
-		if ( dispatcher.rewrite && mymethod == "GET" && typeof content == "object") {
+		if ( mymethod == "GET" && typeof content == "object") {
 			data = null;
 			for (var i in content) {
-				cdata += content[i]+'/';
+				cdata += dispatcher.rewrite ? content[i]+'/' : '&'+i+"="+content[i];
 			}
 		}
 		else {
@@ -251,10 +265,10 @@ var dispatcher = {
 
 		var data, cdata = '', mymethod = method.toUpperCase();
 
-		if ( dispatcher.rewrite && mymethod == "GET" && typeof content == "object") {
+		if ( mymethod == "GET" && typeof content == "object") {
 			data = null;
 			for (var i in content) {
-				cdata += content[i]+'/';
+				cdata += dispatcher.rewrite ? content[i]+'/' : '&'+i+"="+content[i];
 			}
 		}
 		else {

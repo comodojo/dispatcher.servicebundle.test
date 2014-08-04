@@ -211,7 +211,7 @@
 			{
 				"send": {
 					"method": "GET",
-					"content": ["is","test"]
+					"content": {"foo": "is", "bar" :"test"}
 				},
 				"receive": {
 					"status": 200,
@@ -279,7 +279,7 @@
 			{
 				"send": {
 					"method": "GET",
-					"content": ["is","test"]
+					"content": {"foo": "is", "bar" :"test"}
 				},
 				"receive": {
 					"status": 200,
@@ -333,7 +333,7 @@
 			{
 				"send": {
 					"method": "GET",
-					"content": ["Lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipisicing", "elit", "sed", "do", "eiusmod", "tempor", "incididunt", "ut", "labore", "et", "dolore", "magna", "aliqua"]
+					"content": {"exp_1" : "Lorem", "exp_2" : "ipsum", "lik_1" : "dolor", "lik_2" : "sit", "0": "amet", "1":"consectetur", "2":"adipisicing", "3":"elit", "4":"sed", "5":"do", "6":"eiusmod", "7":"tempor", "8":"incididunt", "9":"ut", "10":"labore", "11":"et", "12":"dolore", "13":"magna", "14":"aliqua"}
 				}
 			},
 			{
@@ -465,7 +465,7 @@
 	},
 	"test_multi_redirect": {
 		"name": "Test multiple redirect",
-		"description": "Content should be loaded after 4 different redirects (301, 302, 303, 307)",
+		"description": "Content should be loaded after 4 different redirects (301, 302, 303, 307).<br>PLEASE NOTE: this test will not work if dispatcher in STANDARD mode",
 		"type": "call",
 		"send": {
 			"method": "GET"
