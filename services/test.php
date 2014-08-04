@@ -49,7 +49,7 @@ class test extends Service {
                  ->addMenuItem("Test", $test_link, "right")
                  ->addMenuItem("About", $about_link, "right");
 
-        $template->setContent("<h1>Test content here</h1>");
+        $template->setContent('<h1>Framework functional tests</h1><p class="lead"><span class="glyphicon glyphicon-arrow-left"></span>&nbsp;&nbsp;Select a test case from the left menu to start.</p>');
 
         $template->addScript(DISPATCHER_BASEURL."vendor/comodojo/dispatcher.servicebundle.test/resources/js/dispatcher.test.js?".microtime());
 

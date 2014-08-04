@@ -159,9 +159,9 @@
         ]
     },
     "require": {
-        "comodojo/dispatcher.template.bootstrap": "dev-master",
-        "comodojo/dispatcher.plugin.performer": "dev-master",
-        "comodojo/dispatcher.plugin.test": "dev-master",
-        "comodojo/httprequest": "dev-master"
+        "comodojo/dispatcher.template.bootstrap": "1.0.*",
+        "comodojo/dispatcher.plugin.performer": "1.0.*",
+        "comodojo/dispatcher.plugin.test": "1.0.*",
+        "comodojo/httprequest": "1.0.*"
     }
 }
