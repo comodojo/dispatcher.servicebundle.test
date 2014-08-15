@@ -155,6 +155,11 @@
                 "parameters": {
                     "redirectCode": 307
                 }
+            },
+            {
+                "service": "test_serialization",
+                "type": "ROUTE",
+                "target": "test_serialization.php"
             }
         ]
     },

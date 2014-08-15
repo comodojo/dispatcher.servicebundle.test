@@ -37,7 +37,7 @@ class test_serialization extends Service {
 
                 $this->setContentType("application/xml");
 
-                $return = $this->serialize->toXml($result, true);
+                $return = $this->serialize->toXml($result);
 
                 break;
 
@@ -45,7 +45,7 @@ class test_serialization extends Service {
 
                 $this->setContentType("application/yaml");
 
-                $return = $this->serialize->toYaml($result, true);
+                $return = $this->serialize->toYaml($result);
 
                 break;
             
