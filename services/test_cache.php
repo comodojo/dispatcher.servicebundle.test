@@ -14,7 +14,7 @@ class test_cache extends Service {
 
         sleep(2);
 
-        return $this->serialize->toJSON($return);
+        return $this->serialize->toJson($return);
 
     }
 

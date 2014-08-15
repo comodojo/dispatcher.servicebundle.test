@@ -12,7 +12,7 @@ class test_anymethod extends Service {
 
         $return = $this->test();
 
-        return $this->serialize->toJSON($return);
+        return $this->serialize->toJson($return);
 
     }
 

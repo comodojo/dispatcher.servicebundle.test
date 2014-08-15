@@ -487,6 +487,53 @@
 			"method": "GET"
 		}
 	},
+	"test_serialization": {
+		"name": "Serialization",
+		"description": "Test embedded serialization format (XML, YAML, JSON, DUMP, EXPORT)",
+		"type": "multicall",
+		"tests": [
+			{
+				"send": {
+					"method": "GET",
+					"content": {
+						"format": "XML"
+					}
+				}
+			},
+			{
+				"send": {
+					"method": "GET",
+					"content": {
+						"format": "YAML"
+					}
+				}
+			},
+			{
+				"send": {
+					"method": "GET",
+					"content": {
+						"format": "JSON"
+					}
+				}
+			},
+			{
+				"send": {
+					"method": "GET",
+					"content": {
+						"format": "DUMP"
+					}
+				}
+			},
+			{
+				"send": {
+					"method": "GET",
+					"content": {
+						"format": "EXPORT"
+					}
+				}
+			}
+		]
+	},
 	"test_performance": {
 		"name": "Dispatcher performance",
 		"description": "Dispatcher performance",

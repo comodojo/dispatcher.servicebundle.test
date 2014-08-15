@@ -12,7 +12,7 @@ class test_httpmethods extends Service {
 
         $return = $this->test('GET');
 
-        return $this->serialize->toJSON($return);
+        return $this->serialize->toJson($return);
 
     }
 
@@ -20,7 +20,7 @@ class test_httpmethods extends Service {
 
         $return = $this->test('PUT');
 
-        return $this->serialize->toJSON($return);
+        return $this->serialize->toJson($return);
 
     }
 
@@ -28,7 +28,7 @@ class test_httpmethods extends Service {
 
         $return = $this->test('POST');
 
-        return $this->serialize->toJSON($return);
+        return $this->serialize->toJson($return);
 
     }
 
@@ -36,7 +36,7 @@ class test_httpmethods extends Service {
 
         $return = $this->test('DELETE');
 
-        return $this->serialize->toJSON($return);
+        return $this->serialize->toJson($return);
 
     }
 
