@@ -160,6 +160,11 @@
                 "service": "test_serialization",
                 "type": "ROUTE",
                 "target": "test_serialization.php"
+            },
+            {
+                "service": "test_othermethods",
+                "type": "ROUTE",
+                "target": "test_othermethods.php"
             }
         ]
     },

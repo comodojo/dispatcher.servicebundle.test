@@ -34,6 +34,51 @@
 			}
 		]
 	},
+	"test_othermethods": {
+		"name": "Other HTTP methods",
+		"description": "This test sends a OPTIONS and HEAD requests to server",
+		"type": "multicompare",
+		"tests": [
+			{
+				"send": {
+					"method": "OPTIONS"
+				},
+				"receive": {
+					"status": 200,
+					"headers": [
+						{
+							"header": "Allow",
+							"value": "OPTIONS,HEAD"
+						},{
+							"header": "Access-Control-Allow-Methods",
+							"value": "OPTIONS,HEAD"
+						},{
+							"header": "Access-Control-Allow-Origin",
+							"value": "*"
+						},{
+							"header": "Access-Control-Max-Age",
+							"value": 1728000
+						}
+					]
+				}
+			},
+			{
+				"send": {
+					"method": "HEAD"
+				},
+				"receive": {
+					"status": 200,
+					"headers": [
+						{
+							"header": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					]
+				}
+			}
+			
+		]
+	},
 	"test_supportedmethods": {
 		"name": "Supported only methods",
 		"description": "Supported only methods",
