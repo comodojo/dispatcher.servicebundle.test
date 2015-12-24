@@ -1,7 +1,7 @@
 <?php namespace Comodojo\Dispatcher\Service;
 
 class test_serialization extends Service {
-    
+
     public function setup() {
 
         $this->likes('GET',array('format'));
@@ -13,7 +13,7 @@ class test_serialization extends Service {
         $format = $this->getAttribute("format");
 
         $result = array(
-            "METHOD"        =>  $method,
+            "METHOD"        =>  'GET',
             "HTTPMETHOD"    =>  $_SERVER['REQUEST_METHOD'],
             "ATTRIBUTES"    =>  $this->getAttributes(),
             "PARAMETERS"    =>  $this->getParameters()
@@ -22,13 +22,13 @@ class test_serialization extends Service {
         switch (strtoupper($format)) {
 
             case 'DUMP':
-                
+
                 $return = $this->serialize->toDump($result);
 
                 break;
 
             case 'EXPORT':
-                
+
                 $return = $this->serialize->toExport($result);
 
                 break;
@@ -48,7 +48,7 @@ class test_serialization extends Service {
                 $return = $this->serialize->toYaml($result);
 
                 break;
-            
+
             default:
 
                 $this->setContentType("application/json");
